@@ -1,0 +1,23 @@
+{
+  "name": "jdwl",
+  "version": "0.0.1",
+  "description": "京东物流api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jd",
+    "京东",
+    "京东物流"
+  ],
+  "author": "xiongty@outlook.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brucx/jdwl.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "urllib": "^2.28.1"
+  }
+}
