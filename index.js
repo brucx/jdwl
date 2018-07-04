@@ -15,9 +15,9 @@ module.exports = class JDWL {
   /**
    * API 签名
    * http://jos.jd.com/doc/channel.htm?id=157
-   * @param {Object} data - 参与签名参数，包含系统参数
-   * @param {String} appSecret - 京东 APP 密钥
-   * @return {String} - 签名
+   * @param {Object} data 参与签名参数，包含系统参数
+   * @param {String} appSecret 京东 APP 密钥
+   * @return {String} 签名
    */
   sign(data) {
     const dataArr = [];
@@ -33,9 +33,9 @@ module.exports = class JDWL {
 
   /**
    * 请求封装
-   * @param {String} method - 接口名称
-   * @param {Object} data - 业务参数
-   * @return {Promise} - responce body
+   * @param {String} method 接口名称
+   * @param {Object} data 业务参数
+   * @return {Promise} responce body
    */
   async request({ method, data }) {
     const signData = Object.assign({ '360buy_param_json': JSON.stringify(data) }, {
@@ -65,16 +65,27 @@ module.exports = class JDWL {
         /**
          * 是否可以京配
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.range.check&id=1023
+         * @param {Object} data {平台信息,货物相关信息,收发货人信息等}
+         * @return {Promise} response json
          * @deprecated
          */
-        check() {},
+        async check(data) {
+          let res = await request({ method: 'jingdong.etms.range.check', data });
+          return res.jingdong_etms_range_check_responce;
+        },
       },
       order: {
         /**
          * 获取京东快递运单打印
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.order.print&id=711
+         * @param data {customerCode,deliveryId}
+         * @return 
          */
-        print() {},
+  
+        async print(data) {
+          let res = await request({ method: 'jjingdong.etms.order.print', data });
+          return res.jingdong_etms_order_print_responce;
+        }
       },
       package: {
         /**
@@ -102,8 +113,8 @@ module.exports = class JDWL {
         /**
          * 获取青龙运单号接口
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.waybillcode.get&id=2311
-         * @param {Object} data - { preNum:'100', customerCode: '010K139548', orderType: 0 }
-         * @return {Promise} - response json
+         * @param {Object} data { preNum:'100', customerCode: '010K139548', orderType: 0 }
+         * @return {Promise} response json
          * @deprecated
          */
         async get(data) {
@@ -135,12 +146,13 @@ module.exports = class JDWL {
           /**
            * 查询物流跟踪消息
            * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.receive.trace.get&id=1539
-           * @param {Object} data - { customerCode: '010K139548', waybillCode: 'VA45306531675' }
-           * @return {Promise} - response json
+           * @param {Object} data { customerCode: '010K139548', waybillCode: 'VA45306531675' }
+           * @return {Promise} response json
            */
           async get(data) {
-            return request({ method: 'jingdong.ldop.receive.trace.get', data });
-          },
+            let res = await request({ method: 'jingdong.ldop.receive.trace.get', data });
+            return res.jingdong_ldop_receive_trace_get_responce;
+          }
         },
         pickuporder: {
           /**
@@ -176,8 +188,8 @@ module.exports = class JDWL {
         /**
          * 查询运单信息
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.waybill.generalQuery&id=2397
-         * @param {Object} data - { customerCode: '010K139548', deliveryId: 'VA45306531675' }
-         * @return {Promise} - response json
+         * @param {Object} data { customerCode: '010K139548', deliveryId: 'VA45306531675' }
+         * @return {Promise} response json
          */
         async generalQuery(data) {
           return request({ method: 'jingdong.ldop.waybill.generalQuery', data });
@@ -185,8 +197,8 @@ module.exports = class JDWL {
         /**
          * 京东物流接单接口
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.waybill.receive&id=2122
-         * @param {Object} data - { salePlat, customerCode, orderId, senderName, senderAddress, senderMobile, senderTel, receiveName, receiveAddress, receiveMobile, packageCount, weight, vloumn}
-         * @return {Promise} - response json
+         * @param {Object} data { salePlat, customerCode, orderId, senderName, senderAddress, senderMobile, senderTel, receiveName, receiveAddress, receiveMobile, packageCount, weight, vloumn}
+         * @return {Promise} response json
          */
         async receive(data) {
           return request({ method: 'jingdong.ldop.waybill.receive', data });
