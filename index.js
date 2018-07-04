@@ -78,36 +78,54 @@ module.exports = class JDWL {
         /**
          * 获取京东快递运单打印
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.order.print&id=711
-         * @param data {customerCode,deliveryId}
-         * @return 
+         * @param {Object} data {customerCode,deliveryId}
+         * @return {Promise} response json
          */
   
         async print(data) {
-          let res = await request({ method: 'jjingdong.etms.order.print', data });
+          let res = await request({ method: 'jingdong.etms.order.print', data });
           return res.jingdong_etms_order_print_responce;
-        }
+        },
       },
       package: {
         /**
          * 修改京东快递包裹数
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.package.update&id=712
+         * @param {Object} data {customerCode,deliveryId,packageCount}
+         * @return {Promise} response json
          */
-        update() {},
+      
+        async update(data) {
+          let res = await request({ method: 'jingdong.etms.package.update', data });
+          return res.jingdong_etms_package_update_responce;
+        },
       },
       outerTrace: {
         /**
          * 通过商家编码查询外单全程跟踪
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.outerTrace.queryByBusiId&id=1446
+         * @param {Object} data {outerCode,busiId}
+         * @return {Promise} response json
          */
-        queryByBusiId() {},
+      
+        async queryByBusiId(data) {
+          let res = await request({ method: 'jingdong.etms.outerTrace.queryByBusiId', data });
+          return res.jingdong_etms_outerTrace_queryByBusiId_responce;
+        },
       },
       waybill: {
         /**
          * 青龙接单接口
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.waybill.send&id=2305
+         * @param {Object} data {deliveryId,salePlat,customerCode,orderId}
+         * @return {Promise} response json
          * @deprecated
          */
-        send() {},
+        
+        async send(data) {
+          let res = await request({ method: 'jingdong.etms.waybill.send', data });
+          return res.jingdong_etms_waybill_send_responce;
+        },
       },
       waybillcode: {
         /**
