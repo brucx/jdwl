@@ -1,6 +1,6 @@
 {
   "name": "jdwl",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "京东物流api",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "京东",
     "京东物流"
   ],
-  "author": "xiongty@outlook.com",
+  "author": "xiongty@outlook.com, agiamason219@163.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brucx/jdwl.git"
