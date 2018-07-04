@@ -78,10 +78,9 @@ module.exports = class JDWL {
         /**
          * 获取京东快递运单打印
          * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.order.print&id=711
-         * @param data {customerCode,deliveryId}
-         * @return 
+         * @param {Object} data { customerCode, deliveryId }
+         * @return {Promise} response json
          */
-  
         async print(data) {
           let res = await request({ method: 'jjingdong.etms.order.print', data });
           return res.jingdong_etms_order_print_responce;
