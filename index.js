@@ -1,6 +1,7 @@
 'use strict';
 const crypto = require('crypto');
 const urllib = require('urllib');
+const moment = require('moment');
 
 module.exports = class JDWL {
 
@@ -38,14 +39,15 @@ module.exports = class JDWL {
    * @return {Promise} responce body
    */
   async request({ method, data }) {
-    const signData = Object.assign({ '360buy_param_json': JSON.stringify(data) }, {
+    const signData = {
+      '360buy_param_json': JSON.stringify(data),
       v: this.version,
       method,
-      timestamp: '2018-06-29 17:27:59',
+      timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
       access_token: this.accessToken,
       app_key: this.appKey,
-    });
-    const signedData = Object.assign(signData, { sign: this.sign(signData) });
+    };
+    const signedData = { ...signData, sign: this.sign(signData) };
     try {
       const result = await urllib.request(this.endpoint, {
         method: 'GET',
