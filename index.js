@@ -17,7 +17,6 @@ module.exports = class JDWL {
    * API 签名
    * http://jos.jd.com/doc/channel.htm?id=157
    * @param {Object} data 参与签名参数，包含系统参数
-   * @param {String} appSecret 京东 APP 密钥
    * @return {String} 签名
    */
   sign(data) {
