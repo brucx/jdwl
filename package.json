@@ -1,6 +1,6 @@
 {
   "name": "jdwl",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "京东物流api",
   "main": "index.js",
   "scripts": {

@@ -1,5 +1,6 @@
-# jdwl
-京东物流 Node SDK [![NPM version](https://badge.fury.io/js/jdwl.png)]
+# jdwl ![NPM version](https://badge.fury.io/js/jdwl.png)
+[京东物流](http://jos.jd.com/api/list.htm?id=64) Node SDK 
+
 
 安装：
 
