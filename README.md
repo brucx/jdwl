@@ -1,5 +1,11 @@
 # jdwl
-京东物流Node SDK
+京东物流 Node SDK [![NPM version](https://badge.fury.io/js/jdwl.png)]
+
+安装：
+
+```
+npm i jdwl
+```
 
 示例：
 
