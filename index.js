@@ -20,15 +20,8 @@ module.exports = class JDWL {
    * @return {String} 签名
    */
   sign(data) {
-    const dataArr = [];
-    for (const key in data) {
-      dataArr.push(key + data[key]);
-    }
-    dataArr.sort();
-    const md5 = crypto.createHash('md5');
-    const signString = this.appSecret + dataArr.join('') + this.appSecret;
-    const result = md5.update(signString).digest('hex');
-    return result.toUpperCase();
+    const signString = Object.entries(data).reduce((acc, [key, value]) => [...acc, `${key}=${value}`], []).sort().join('&');
+    return crypto.createHash('md5').update(signString).digest('hex').toUpperCase();
   }
 
   /**
@@ -71,7 +64,7 @@ module.exports = class JDWL {
          * @deprecated
          */
         async check(data) {
-          let res = await request({ method: 'jingdong.etms.range.check', data });
+          const res = await request({ method: 'jingdong.etms.range.check', data });
           return res.jingdong_etms_range_check_responce;
         },
       },
@@ -83,7 +76,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async print(data) {
-          let res = await request({ method: 'jingdong.etms.order.print', data });
+          const res = await request({ method: 'jingdong.etms.order.print', data });
           return res.jingdong_etms_order_print_responce;
         },
       },
@@ -95,7 +88,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async update(data) {
-          let res = await request({ method: 'jingdong.etms.package.update', data });
+          const res = await request({ method: 'jingdong.etms.package.update', data });
           return res.jingdong_etms_package_update_responce;
         },
       },
@@ -107,7 +100,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async queryByBusiId(data) {
-          let res = await request({ method: 'jingdong.etms.outerTrace.queryByBusiId', data });
+          const res = await request({ method: 'jingdong.etms.outerTrace.queryByBusiId', data });
           return res.jingdong_etms_outerTrace_queryByBusiId_responce;
         },
       },
@@ -120,7 +113,7 @@ module.exports = class JDWL {
          * @deprecated
          */
         async send(data) {
-          let res = await request({ method: 'jingdong.etms.waybill.send', data });
+          const res = await request({ method: 'jingdong.etms.waybill.send', data });
           return res.jingdong_etms_waybill_send_responce;
         },
       },
@@ -133,7 +126,7 @@ module.exports = class JDWL {
          * @deprecated
          */
         async get(data) {
-          let res = await request({ method: 'jingdong.etms.waybillcode.get', data });
+          const res = await request({ method: 'jingdong.etms.waybillcode.get', data });
           return res.jingdong_etms_waybillcode_get_responce;
         },
       },
@@ -151,7 +144,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async send(data) {
-          let res = await request({ method: 'jingdong.ldop.self.pickup.sms.send', data });
+          const res = await request({ method: 'jingdong.ldop.self.pickup.sms.send', data });
           return res.jingdong_ldop_self_pickup_sms_send_responce;
         },
       } } },
@@ -164,7 +157,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
           async intercept(data) {
-            let res = await request({ method: 'jingdong.ldop.receive.order.intercept', data });
+            const res = await request({ method: 'jingdong.ldop.receive.order.intercept', data });
             return res.jingdong_ldop_receive_order_intercept_responce;
           }
         },
@@ -176,7 +169,7 @@ module.exports = class JDWL {
            * @return {Promise} response json
            */
           async get(data) {
-            let res = await request({ method: 'jingdong.ldop.receive.trace.get', data });
+            const res = await request({ method: 'jingdong.ldop.receive.trace.get', data });
             return res.jingdong_ldop_receive_trace_get_responce;
           },
         },
@@ -188,7 +181,7 @@ module.exports = class JDWL {
            * @return {Promise} response json
            */
           async receive(data) {
-            let res = await request({ method: 'jingdong.ldop.receive.pickuporder.receive', data });
+            const res = await request({ method: 'jingdong.ldop.receive.pickuporder.receive', data });
             return res.jingdong_ldop_receive_pickuporder_receive_responce;
           },
         },
@@ -201,7 +194,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async approval(data) {
-          let res = await request({ method: 'jingdong.ldop.abnormal.approval', data });
+          const res = await request({ method: 'jingdong.ldop.abnormal.approval', data });
           return res.jingdong_ldop_abnormal_approval_responce;
         },
 
@@ -212,7 +205,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async get(data) {
-          let res = await request({ method: 'jingdong.ldop.abnormal.get', data });
+          const res = await request({ method: 'jingdong.ldop.abnormal.get', data });
           return res.jingdong_ldop_abnormal_get_responce;
         },
       },
@@ -224,7 +217,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async query(data) {
-          let res = await request({ method: 'jingdong.ldop.waybill.query', data });
+          const res = await request({ method: 'jingdong.ldop.waybill.query', data });
           return res.jingdong_ldop_waybill_query_responce;
         },
 
@@ -235,7 +228,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async querySignatureImage(data) {
-          let res = await request({ method: 'jingdong.ldop.waybill.querySignatureImage', data });
+          const res = await request({ method: 'jingdong.ldop.waybill.querySignatureImage', data });
           return res.jingdong_ldop_waybill_querySignatureImage_responce;
         },
 
@@ -246,7 +239,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async generalQuery(data) {
-          let res = await request({ method: 'jingdong.ldop.waybill.generalQuery', data });
+          const res = await request({ method: 'jingdong.ldop.waybill.generalQuery', data });
           return res.jingdong_ldop_waybill_generalQuery_responce;
         },
 
@@ -257,7 +250,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async receive(data) {
-          let res = await request({ method: 'jingdong.ldop.waybill.receive', data });
+          const res = await request({ method: 'jingdong.ldop.waybill.receive', data });
           return res.jingdong_ldop_waybill_receive_responce;
         },
       },
@@ -269,7 +262,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async eportdeclare(data) {
-          let res = await request({ method: 'jingdong.ldop.center.api.eportdeclare', data });
+          const res = await request({ method: 'jingdong.ldop.center.api.eportdeclare', data });
           return res.jingdong_ldop_center_api_eportdeclare_responce;
         },
 
@@ -280,7 +273,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async receivePaymentInfo(data) {
-          let res = await request({ method: 'jingdong.ldop.center.api.receivePaymentInfo', data });
+          const res = await request({ method: 'jingdong.ldop.center.api.receivePaymentInfo', data });
           return res.jingdong_ldop_center_api_receivePaymentInfo_responce;
         },
       } },
@@ -292,7 +285,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async WaybillPickupApi(data) {
-          let res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillPickupApi', data });
+          const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillPickupApi', data });
           return res.jingdong_ldop_middle_waybill_WaybillPickupApi_responce;
         },
 
@@ -303,7 +296,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async Waybill2CTraceApi(data) {
-          let res = await request({ method: 'jingdong.ldop.middle.waybill.Waybill2CTraceApi', data });
+          const res = await request({ method: 'jingdong.ldop.middle.waybill.Waybill2CTraceApi', data });
           return res.jingdong_ldop_middle_waybill_Waybill2CTraceApi_responce;
         },
 
@@ -314,7 +307,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async WaybillTrackAndTimePositionApi(data) {
-          let res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi', data });
+          const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi', data });
           return res.jingdong_ldop_middle_waybill_WaybillTrackAndTimePositionApi_responce;
         },
       } },
@@ -326,7 +319,7 @@ module.exports = class JDWL {
          * @return {Promise} response json
          */
         async deliveryPickupReceive(data) {
-          let res = await request({ method: 'jingdong.ldop.delivery.deliveryPickupReceive', data });
+          const res = await request({ method: 'jingdong.ldop.delivery.deliveryPickupReceive', data });
           return res.jingdong_ldop_delivery_deliveryPickupReceive_responce;
         },
       },
