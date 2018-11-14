@@ -20,7 +20,11 @@ module.exports = class JDWL {
    * @return {String} 签名
    */
   sign(data) {
-    const signString = Object.entries(data).reduce((acc, [key, value]) => [...acc, `${key}=${value}`], []).sort().join('&');
+    const signString = [
+      this.appSecret, 
+      ...Object.entries(data).map(([key, value]) => `${key}${value}`).sort(),
+      this.appSecret
+    ].join('');
     return crypto.createHash('md5').update(signString).digest('hex').toUpperCase();
   }
 
