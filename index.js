@@ -1,7 +1,14 @@
 'use strict';
 const crypto = require('crypto');
-const urllib = require('urllib');
+const axios = require('axios');
 const moment = require('moment');
+
+const log = (obj) => {
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line no-console
+    console.debug(obj);
+  }
+};
 
 module.exports = class JDWL {
 
@@ -21,7 +28,7 @@ module.exports = class JDWL {
    */
   sign(data) {
     const signString = [
-      this.appSecret, 
+      this.appSecret,
       ...Object.entries(data).map(([key, value]) => `${key}${value}`).sort(),
       this.appSecret
     ].join('');
@@ -36,21 +43,18 @@ module.exports = class JDWL {
    */
   async request({ method, data }) {
     const signData = {
-      '360buy_param_json': JSON.stringify(data),
-      v: this.version,
       method,
-      timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+      v: this.version,
       access_token: this.accessToken,
       app_key: this.appKey,
+      timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+      '360buy_param_json': JSON.stringify(data),
     };
     const signedData = { ...signData, sign: this.sign(signData) };
     try {
-      const result = await urllib.request(this.endpoint, {
-        method: 'GET',
-        data: signedData,
-      });
-      const dataJson = JSON.parse(result.data);
-      return dataJson;
+      const { data } = await axios.get(this.endpoint, { params: signedData });
+      log(data)
+      return data;
     } catch (err) {
       console.error(err);
     }
@@ -140,26 +144,30 @@ module.exports = class JDWL {
   get ldop() {
     const request = this.request.bind(this);
     return {
-      self: { pickup: { sms: {
-        /**
-         * 重发自提码接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.self.pickup.sms.send&id=2160
-         * @param {Object} data { waybillCode, customerCode }
-         * @return {Promise} response json
-         */
-        async send(data) {
-          const res = await request({ method: 'jingdong.ldop.self.pickup.sms.send', data });
-          return res.jingdong_ldop_self_pickup_sms_send_responce;
-        },
-      } } },
+      self: {
+        pickup: {
+          sms: {
+            /**
+             * 重发自提码接口
+             * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.self.pickup.sms.send&id=2160
+             * @param {Object} data { waybillCode, customerCode }
+             * @return {Promise} response json
+             */
+            async send(data) {
+              const res = await request({ method: 'jingdong.ldop.self.pickup.sms.send', data });
+              return res.jingdong_ldop_self_pickup_sms_send_responce;
+            },
+          }
+        }
+      },
       receive: {
         order: {
-        /**
-         * 运单拦截
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.receive.order.intercept&id=1435
-         * @param {Object} data { vendorCode, deliveryId, interceptReason }
-         * @return {Promise} response json
-         */
+          /**
+           * 运单拦截
+           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.receive.order.intercept&id=1435
+           * @param {Object} data { vendorCode, deliveryId, interceptReason }
+           * @return {Promise} response json
+           */
           async intercept(data) {
             const res = await request({ method: 'jingdong.ldop.receive.order.intercept', data });
             return res.jingdong_ldop_receive_order_intercept_responce;
@@ -258,63 +266,67 @@ module.exports = class JDWL {
           return res.jingdong_ldop_waybill_receive_responce;
         },
       },
-      center: { api: {
-        /**
-         * 运单申报
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.center.api.eportdeclare&id=1960
-         * @param {Object} data { 平台信息,货物相关信息,收货人信息,发货人信息等 }
-         * @return {Promise} response json
-         */
-        async eportdeclare(data) {
-          const res = await request({ method: 'jingdong.ldop.center.api.eportdeclare', data });
-          return res.jingdong_ldop_center_api_eportdeclare_responce;
-        },
+      center: {
+        api: {
+          /**
+           * 运单申报
+           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.center.api.eportdeclare&id=1960
+           * @param {Object} data { 平台信息,货物相关信息,收货人信息,发货人信息等 }
+           * @return {Promise} response json
+           */
+          async eportdeclare(data) {
+            const res = await request({ method: 'jingdong.ldop.center.api.eportdeclare', data });
+            return res.jingdong_ldop_center_api_eportdeclare_responce;
+          },
 
-        /**
-         * 收到支付信息接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.center.api.receivePaymentInfo&id=2242
-         * @param {Object} data { deliveryId, customerCode, recMoney, receivedMoney, paymentState, paymentTime, payer }
-         * @return {Promise} response json
-         */
-        async receivePaymentInfo(data) {
-          const res = await request({ method: 'jingdong.ldop.center.api.receivePaymentInfo', data });
-          return res.jingdong_ldop_center_api_receivePaymentInfo_responce;
-        },
-      } },
-      middle: { waybill: {
-        /**
-         * 取件单查询接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.WaybillPickupApi&id=2349
-         * @param {Object} data { vendorCode, pickupCode }
-         * @return {Promise} response json
-         */
-        async WaybillPickupApi(data) {
-          const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillPickupApi', data });
-          return res.jingdong_ldop_middle_waybill_WaybillPickupApi_responce;
-        },
+          /**
+           * 收到支付信息接口
+           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.center.api.receivePaymentInfo&id=2242
+           * @param {Object} data { deliveryId, customerCode, recMoney, receivedMoney, paymentState, paymentTime, payer }
+           * @return {Promise} response json
+           */
+          async receivePaymentInfo(data) {
+            const res = await request({ method: 'jingdong.ldop.center.api.receivePaymentInfo', data });
+            return res.jingdong_ldop_center_api_receivePaymentInfo_responce;
+          },
+        }
+      },
+      middle: {
+        waybill: {
+          /**
+           * 取件单查询接口
+           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.WaybillPickupApi&id=2349
+           * @param {Object} data { vendorCode, pickupCode }
+           * @return {Promise} response json
+           */
+          async WaybillPickupApi(data) {
+            const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillPickupApi', data });
+            return res.jingdong_ldop_middle_waybill_WaybillPickupApi_responce;
+          },
 
-        /**
-         * 2C全程物流跟踪接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.Waybill2CTraceApi&id=2394
-         * @param {Object} data { tradeCode, waybillCode }
-         * @return {Promise} response json
-         */
-        async Waybill2CTraceApi(data) {
-          const res = await request({ method: 'jingdong.ldop.middle.waybill.Waybill2CTraceApi', data });
-          return res.jingdong_ldop_middle_waybill_Waybill2CTraceApi_responce;
-        },
+          /**
+           * 2C全程物流跟踪接口
+           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.Waybill2CTraceApi&id=2394
+           * @param {Object} data { tradeCode, waybillCode }
+           * @return {Promise} response json
+           */
+          async Waybill2CTraceApi(data) {
+            const res = await request({ method: 'jingdong.ldop.middle.waybill.Waybill2CTraceApi', data });
+            return res.jingdong_ldop_middle_waybill_Waybill2CTraceApi_responce;
+          },
 
-        /**
-         * 获取订单实时位置接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi&id=2592
-         * @param {Object} data { waybillCode, gpsTime, customerCode }
-         * @return {Promise} response json
-         */
-        async WaybillTrackAndTimePositionApi(data) {
-          const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi', data });
-          return res.jingdong_ldop_middle_waybill_WaybillTrackAndTimePositionApi_responce;
-        },
-      } },
+          /**
+           * 获取订单实时位置接口
+           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi&id=2592
+           * @param {Object} data { waybillCode, gpsTime, customerCode }
+           * @return {Promise} response json
+           */
+          async WaybillTrackAndTimePositionApi(data) {
+            const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi', data });
+            return res.jingdong_ldop_middle_waybill_WaybillTrackAndTimePositionApi_responce;
+          },
+        }
+      },
       delivery: {
         /**
          * 送取同步下单接口
