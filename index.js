@@ -73,7 +73,7 @@ module.exports = class JDWL {
          */
         async check(data) {
           const res = await request({ method: 'jingdong.etms.range.check', data });
-          return res.jingdong_etms_range_check_responce;
+          return res.jingdong_etms_range_check_response;
         },
       },
       order: {
@@ -85,7 +85,7 @@ module.exports = class JDWL {
          */
         async print(data) {
           const res = await request({ method: 'jingdong.etms.order.print', data });
-          return res.jingdong_etms_order_print_responce;
+          return res.jingdong_etms_order_print_response;
         },
       },
       package: {
@@ -97,7 +97,7 @@ module.exports = class JDWL {
          */
         async update(data) {
           const res = await request({ method: 'jingdong.etms.package.update', data });
-          return res.jingdong_etms_package_update_responce;
+          return res.jingdong_etms_package_update_response;
         },
       },
       outerTrace: {
@@ -109,7 +109,7 @@ module.exports = class JDWL {
          */
         async queryByBusiId(data) {
           const res = await request({ method: 'jingdong.etms.outerTrace.queryByBusiId', data });
-          return res.jingdong_etms_outerTrace_queryByBusiId_responce;
+          return res.jingdong_etms_outerTrace_queryByBusiId_response;
         },
       },
       waybill: {
@@ -122,7 +122,7 @@ module.exports = class JDWL {
          */
         async send(data) {
           const res = await request({ method: 'jingdong.etms.waybill.send', data });
-          return res.jingdong_etms_waybill_send_responce;
+          return res.jingdong_etms_waybill_send_response;
         },
       },
       waybillcode: {
@@ -135,7 +135,7 @@ module.exports = class JDWL {
          */
         async get(data) {
           const res = await request({ method: 'jingdong.etms.waybillcode.get', data });
-          return res.jingdong_etms_waybillcode_get_responce;
+          return res.jingdong_etms_waybillcode_get_response;
         },
       },
     };
@@ -155,7 +155,7 @@ module.exports = class JDWL {
              */
             async send(data) {
               const res = await request({ method: 'jingdong.ldop.self.pickup.sms.send', data });
-              return res.jingdong_ldop_self_pickup_sms_send_responce;
+              return res.jingdong_ldop_self_pickup_sms_send_response;
             },
           }
         }
@@ -170,7 +170,7 @@ module.exports = class JDWL {
            */
           async intercept(data) {
             const res = await request({ method: 'jingdong.ldop.receive.order.intercept', data });
-            return res.jingdong_ldop_receive_order_intercept_responce;
+            return res.jingdong_ldop_receive_order_intercept_response;
           }
         },
         trace: {
@@ -182,7 +182,7 @@ module.exports = class JDWL {
            */
           async get(data) {
             const res = await request({ method: 'jingdong.ldop.receive.trace.get', data });
-            return res.jingdong_ldop_receive_trace_get_responce;
+            return res.jingdong_ldop_receive_trace_get_response;
           },
         },
         pickuporder: {
@@ -194,7 +194,7 @@ module.exports = class JDWL {
            */
           async receive(data) {
             const res = await request({ method: 'jingdong.ldop.receive.pickuporder.receive', data });
-            return res.jingdong_ldop_receive_pickuporder_receive_responce;
+            return res.jingdong_ldop_receive_pickuporder_receive_response;
           },
         },
       },
@@ -207,7 +207,7 @@ module.exports = class JDWL {
          */
         async approval(data) {
           const res = await request({ method: 'jingdong.ldop.abnormal.approval', data });
-          return res.jingdong_ldop_abnormal_approval_responce;
+          return res.jingdong_ldop_abnormal_approval_response;
         },
 
         /**
@@ -218,7 +218,7 @@ module.exports = class JDWL {
          */
         async get(data) {
           const res = await request({ method: 'jingdong.ldop.abnormal.get', data });
-          return res.jingdong_ldop_abnormal_get_responce;
+          return res.jingdong_ldop_abnormal_get_response;
         },
       },
       waybill: {
@@ -230,7 +230,7 @@ module.exports = class JDWL {
          */
         async query(data) {
           const res = await request({ method: 'jingdong.ldop.waybill.query', data });
-          return res.jingdong_ldop_waybill_query_responce;
+          return res.jingdong_ldop_waybill_query_response;
         },
 
         /**
@@ -241,7 +241,7 @@ module.exports = class JDWL {
          */
         async querySignatureImage(data) {
           const res = await request({ method: 'jingdong.ldop.waybill.querySignatureImage', data });
-          return res.jingdong_ldop_waybill_querySignatureImage_responce;
+          return res.jingdong_ldop_waybill_querySignatureImage_response;
         },
 
         /**
@@ -252,7 +252,7 @@ module.exports = class JDWL {
          */
         async generalQuery(data) {
           const res = await request({ method: 'jingdong.ldop.waybill.generalQuery', data });
-          return res.jingdong_ldop_waybill_generalQuery_responce;
+          return res.jingdong_ldop_waybill_generalQuery_response;
         },
 
         /**
@@ -263,7 +263,7 @@ module.exports = class JDWL {
          */
         async receive(data) {
           const res = await request({ method: 'jingdong.ldop.waybill.receive', data });
-          return res.jingdong_ldop_waybill_receive_responce;
+          return res.jingdong_ldop_waybill_receive_response;
         },
       },
       center: {
@@ -276,7 +276,7 @@ module.exports = class JDWL {
            */
           async eportdeclare(data) {
             const res = await request({ method: 'jingdong.ldop.center.api.eportdeclare', data });
-            return res.jingdong_ldop_center_api_eportdeclare_responce;
+            return res.jingdong_ldop_center_api_eportdeclare_response;
           },
 
           /**
@@ -287,7 +287,7 @@ module.exports = class JDWL {
            */
           async receivePaymentInfo(data) {
             const res = await request({ method: 'jingdong.ldop.center.api.receivePaymentInfo', data });
-            return res.jingdong_ldop_center_api_receivePaymentInfo_responce;
+            return res.jingdong_ldop_center_api_receivePaymentInfo_response;
           },
         }
       },
@@ -301,7 +301,7 @@ module.exports = class JDWL {
            */
           async WaybillPickupApi(data) {
             const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillPickupApi', data });
-            return res.jingdong_ldop_middle_waybill_WaybillPickupApi_responce;
+            return res.jingdong_ldop_middle_waybill_WaybillPickupApi_response;
           },
 
           /**
@@ -312,7 +312,7 @@ module.exports = class JDWL {
            */
           async Waybill2CTraceApi(data) {
             const res = await request({ method: 'jingdong.ldop.middle.waybill.Waybill2CTraceApi', data });
-            return res.jingdong_ldop_middle_waybill_Waybill2CTraceApi_responce;
+            return res.jingdong_ldop_middle_waybill_Waybill2CTraceApi_response;
           },
 
           /**
@@ -323,7 +323,7 @@ module.exports = class JDWL {
            */
           async WaybillTrackAndTimePositionApi(data) {
             const res = await request({ method: 'jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi', data });
-            return res.jingdong_ldop_middle_waybill_WaybillTrackAndTimePositionApi_responce;
+            return res.jingdong_ldop_middle_waybill_WaybillTrackAndTimePositionApi_response;
           },
         }
       },
@@ -336,7 +336,7 @@ module.exports = class JDWL {
          */
         async deliveryPickupReceive(data) {
           const res = await request({ method: 'jingdong.ldop.delivery.deliveryPickupReceive', data });
-          return res.jingdong_ldop_delivery_deliveryPickupReceive_responce;
+          return res.jingdong_ldop_delivery_deliveryPickupReceive_response;
         },
       },
     };
