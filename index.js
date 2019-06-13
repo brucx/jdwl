@@ -340,7 +340,7 @@ module.exports = class JDWL {
         },
 
         /**
-         * 取消运单 - 取消B2C纯配下单API
+         * 取消运单 - 取消B2C纯配单
          * http://open.jd.com/home/home#/doc/api?apiCateId=75&apiId=3482&apiName=jingdong.ldop.delivery.provider.cancelWayBill
          * @param {Object} data { userPin, waybillCode, customerCode, source, cancelReason, operatorName }
          * @return {Promise} response json
@@ -352,6 +352,18 @@ module.exports = class JDWL {
           }
         }
       },
+      pickup: {
+        /**
+         * 取消运单 - 取消售后上门取QWD单
+         * http://open.jd.com/home/home#/doc/api?apiCateId=75&apiId=3482&apiName=jingdong.ldop.pickup.cancel
+         * @param {Object} data { userPin, waybillCode, customerCode, source, cancelReason, operatorName }
+         * @return {Promise} response json
+         */
+        async cancel(data) {
+          const res = await request({ method: 'jingdong.ldop.pickup.cancel', data });
+          return res.jingdong_ldop_delivery_provider_cancelWayBill_responce; // TODO... 文档里这么写的，还没测试
+        }
+      }
     };
   }
 };
