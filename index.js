@@ -338,6 +338,19 @@ module.exports = class JDWL {
           const res = await request({ method: 'jingdong.ldop.delivery.deliveryPickupReceive', data });
           return res.jingdong_ldop_delivery_deliveryPickupReceive_responce;
         },
+
+        /**
+         * 取消运单 - 取消B2C纯配下单API
+         * http://open.jd.com/home/home#/doc/api?apiCateId=75&apiId=3482&apiName=jingdong.ldop.delivery.provider.cancelWayBill
+         * @param {Object} data { userPin, waybillCode, customerCode, source, cancelReason, operatorName }
+         * @return {Promise} response json
+         */
+        provider: {
+          async cancelWayBill(data) {
+            const res = await request({ method: 'jingdong.ldop.delivery.provider.cancelWayBill', data });
+            return res.jingdong_ldop_delivery_provider_cancelWayBill_responce;
+          }
+        }
       },
     };
   }
