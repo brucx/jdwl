@@ -1,6 +1,8 @@
 # jdwl ![NPM version](https://badge.fury.io/js/jdwl.png)
 [京东物流](http://jos.jd.com/api/list.htm?id=64) Node SDK 
 
+Access Token 获取
+https://open.jd.com/home/home#/doc/common?listId=880
 
 安装：
 
