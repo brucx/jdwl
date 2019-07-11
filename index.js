@@ -339,6 +339,15 @@ module.exports = class JDWL {
           return res.jingdong_ldop_delivery_deliveryPickupReceive_responce;
         },
       },
+      pickup: {
+        async cancel(data) {
+          const res = await request({
+            method: 'jingdong.ldop.pickup.cancel',
+            data
+          });
+          return res.jingdong_ldop_pickup_cancel_responce;
+        }
+      }
     };
   }
 };
