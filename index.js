@@ -361,7 +361,7 @@ module.exports = class JDWL {
          */
         async cancel(data) {
           const res = await request({ method: 'jingdong.ldop.pickup.cancel', data });
-          return res.jingdong_ldop_delivery_provider_cancelWayBill_responce; // TODO... 文档里这么写的，还没测试
+          return res.jingdong_ldop_pickup_cancel_responce; // TODO... 文档里这么写的，还没测试
         }
       }
     };
