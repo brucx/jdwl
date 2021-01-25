@@ -4,6 +4,18 @@
 Access Token 获取
 https://open.jd.com/home/home#/doc/common?listId=880
 
+获取 Code
+
+```
+https://open-oauth.jd.com/oauth2/to_login?app_key=APP_KEY&response_type=code&redirect_uri=http://localhost:7001/api/v3/logistics/callback&state=20180416&scope=snsapi_base
+```
+
+获取 Access Token
+
+```
+https://open-oauth.jd.com/oauth2/access_token?app_key=APP_KEY&app_secret=APP_SECRET&grant_type=authorization_code&code=1yxNgo
+```
+
 安装：
 
 ```

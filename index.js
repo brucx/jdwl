@@ -66,7 +66,7 @@ module.exports = class JDWL {
       range: {
         /**
          * 是否可以京配
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.range.check&id=1023
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13208&apiName=jingdong.etms.range.check
          * @param {Object} data { 平台信息, 货物相关信息, 收货人信息, 发货人信息等 }
          * @return {Promise} response json
          * @deprecated
@@ -79,7 +79,7 @@ module.exports = class JDWL {
       order: {
         /**
          * 获取京东快递运单打印
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.order.print&id=711
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.etms.order.print
          * @param {Object} data { customerCode, deliveryId }
          * @return {Promise} response json
          */
@@ -91,7 +91,7 @@ module.exports = class JDWL {
       package: {
         /**
          * 修改京东快递包裹数
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.package.update&id=712
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=12997&apiName=jingdong.etms.package.update
          * @param {Object} data { customerCode, deliveryId, packageCount }
          * @return {Promise} response json
          */
@@ -103,7 +103,7 @@ module.exports = class JDWL {
       outerTrace: {
         /**
          * 通过商家编码查询外单全程跟踪
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.outerTrace.queryByBusiId&id=1446
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.etms.outerTrace.queryByBusiId
          * @param {Object} data { outerCode, busiId }
          * @return {Promise} response json
          */
@@ -115,7 +115,7 @@ module.exports = class JDWL {
       waybill: {
         /**
          * 青龙接单接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.waybill.send&id=2305
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.etms.waybill.send
          * @param {Object} data { deliveryId, salePlat, customerCode, orderId, senderName, senderAddress, receiveName, receiveAddress, packageCount, weight, vloumn }
          * @return {Promise} response json
          * @deprecated
@@ -128,7 +128,7 @@ module.exports = class JDWL {
       waybillcode: {
         /**
          * 获取青龙运单号接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.etms.waybillcode.get&id=2311
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.etms.waybillcode.get
          * @param {Object} data { preNum:'100', customerCode: '010K139548', orderType: 0 }
          * @return {Promise} response json
          * @deprecated
@@ -149,7 +149,7 @@ module.exports = class JDWL {
           sms: {
             /**
              * 重发自提码接口
-             * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.self.pickup.sms.send&id=2160
+             * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.self.pickup.sms.send
              * @param {Object} data { waybillCode, customerCode }
              * @return {Promise} response json
              */
@@ -164,7 +164,7 @@ module.exports = class JDWL {
         order: {
           /**
            * 运单拦截
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.receive.order.intercept&id=1435
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.receive.order.intercept
            * @param {Object} data { vendorCode, deliveryId, interceptReason }
            * @return {Promise} response json
            */
@@ -176,7 +176,7 @@ module.exports = class JDWL {
         trace: {
           /**
            * 查询物流跟踪消息
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.receive.trace.get&id=1539
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.receive.trace.get
            * @param {Object} data { customerCode: '010K139548', waybillCode: 'VA45306531675' }
            * @return {Promise} response json
            */
@@ -188,7 +188,7 @@ module.exports = class JDWL {
         pickuporder: {
           /**
            * 取件单下单
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.receive.pickuporder.receive&id=1535
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.receive.pickuporder.receive
            * @param {Object} data { 取件人相关信息，商家相关信息，物品相关信息等 }
            * @return {Promise} response json
            */
@@ -201,7 +201,7 @@ module.exports = class JDWL {
       abnormal: {
         /**
          * 异常单审核
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.abnormal.approval&id=2131
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.abnormal.approval
          * @param {Object} data { customerCode, deliveryId, responseComment, type }
          * @return {Promise} response json
          */
@@ -212,7 +212,7 @@ module.exports = class JDWL {
 
         /**
          * 查询拒收再投单
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.abnormal.get&id=2132
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.abnormal.get
          * @param {Object} data { customerCode：'010K139548' }
          * @return {Promise} response json
          */
@@ -224,7 +224,7 @@ module.exports = class JDWL {
       waybill: {
         /**
          * 重量包裹数查询接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.waybill.query&id=2189
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.waybill.query
          * @param {Object} data { deliveryId: 'VA45306531675', customerCode: '010K139548' }
          * @return {Promise} response json
          */
@@ -235,7 +235,7 @@ module.exports = class JDWL {
 
         /**
          * 电子签名接口查询接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.waybill.querySignatureImage&id=2241
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.waybill.querySignatureImage
          * @param {Object} data { deliveryId: 'VA45306531675', customerCode: '010K139548' }
          * @return {Promise} response json
          */
@@ -246,7 +246,7 @@ module.exports = class JDWL {
 
         /**
          * 查询运单信息
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.waybill.generalQuery&id=2397
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.waybill.generalQuery
          * @param {Object} data { customerCode: '010K139548', deliveryId: 'VA45306531675' }
          * @return {Promise} response json
          */
@@ -257,7 +257,7 @@ module.exports = class JDWL {
 
         /**
          * 京东物流接单接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.waybill.receive&id=2122
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.waybill.receive
          * @param {Object} data { salePlat, customerCode, orderId, senderName, senderAddress, senderMobile, senderTel, receiveName, receiveAddress, receiveMobile, packageCount, weight, vloumn }
          * @return {Promise} response json
          */
@@ -270,7 +270,7 @@ module.exports = class JDWL {
         api: {
           /**
            * 运单申报
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.center.api.eportdeclare&id=1960
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.center.api.eportdeclare
            * @param {Object} data { 平台信息,货物相关信息,收货人信息,发货人信息等 }
            * @return {Promise} response json
            */
@@ -281,7 +281,7 @@ module.exports = class JDWL {
 
           /**
            * 收到支付信息接口
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.center.api.receivePaymentInfo&id=2242
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.center.api.receivePaymentInfo
            * @param {Object} data { deliveryId, customerCode, recMoney, receivedMoney, paymentState, paymentTime, payer }
            * @return {Promise} response json
            */
@@ -295,7 +295,7 @@ module.exports = class JDWL {
         waybill: {
           /**
            * 取件单查询接口
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.WaybillPickupApi&id=2349
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.middle.waybill.WaybillPickupApi
            * @param {Object} data { vendorCode, pickupCode }
            * @return {Promise} response json
            */
@@ -306,7 +306,7 @@ module.exports = class JDWL {
 
           /**
            * 2C全程物流跟踪接口
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.Waybill2CTraceApi&id=2394
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.middle.waybill.Waybill2CTraceApi
            * @param {Object} data { tradeCode, waybillCode }
            * @return {Promise} response json
            */
@@ -317,7 +317,7 @@ module.exports = class JDWL {
 
           /**
            * 获取订单实时位置接口
-           * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi&id=2592
+           * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.middle.waybill.WaybillTrackAndTimePositionApi
            * @param {Object} data { waybillCode, gpsTime, customerCode }
            * @return {Promise} response json
            */
@@ -330,7 +330,7 @@ module.exports = class JDWL {
       delivery: {
         /**
          * 送取同步下单接口
-         * http://jos.jd.com/api/detail.htm?apiName=jingdong.ldop.delivery.deliveryPickupReceive&id=2447
+         * https://jos.jd.com/apilist?apiGroupId=64&apiId=13539&apiName=jingdong.ldop.delivery.deliveryPickupReceive
          * @param {Object} data { josPin, salePlat, customerCode, orderId, senderName, senderAddress, receiveName, receiveAddress, packageCount, weight, vloumn, customerTel, backAddress, customerContract, pickupOrderId, productName, productCount }
          * @return {Promise} response json
          */
